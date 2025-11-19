@@ -1,0 +1,117 @@
+.navContainer {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    background: rgba(15, 18, 23, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--stroke);
+}
+
+/* Desktop Nav */
+.desktopNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 48px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navLinks {
+    display: flex;
+    gap: 32px;
+}
+
+.navLink {
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: color 0.2s;
+    font-size: 15px;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: var(--text-primary);
+}
+
+/* Mobile Nav */
+.mobileNav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bottom-nav-height);
+    background: rgba(15, 18, 23, 0.9);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--stroke);
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+    /* Safe area */
+    z-index: 100;
+}
+
+.mobileNavItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.mobileNavItem.active {
+    color: var(--primary-blue);
+}
+
+.mobileCreateBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: -20px;
+    box-shadow: 0 8px 20px rgba(134, 77, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+    .navContainer {
+        display: none;
+        /* Hide top nav on mobile */
+    }
+
+    .mobileNav {
+        display: flex;
+    }
+
+    /* Mobile Top Bar for Logo/Notifs */
+    .mobileHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 99;
+        background: var(--bg-dark);
+    }
+}
+
+@media (min-width: 769px) {
+    .mobileHeader {
+        display: none;
+    }
+}
