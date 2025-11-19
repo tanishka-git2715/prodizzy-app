@@ -26,7 +26,7 @@ npm run dev
 
 Open your web browser and go to:
 
-[http://localhost:3000](http://localhost:3000)
+[https://prodizzy-app.vercel.app/](https://prodizzy-app.vercel.app/)
 
 ## Features
 
