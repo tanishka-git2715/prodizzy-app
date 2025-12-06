@@ -26,7 +26,7 @@ npm run dev
 
 Open your web browser and go to:
 
-[https://prodizzy-app.vercel.app/](https://prodizzy-app.vercel.app/)
+[https://www.prodizzy.com/](https://www.prodizzy.com/)
 
 ## Features
 
