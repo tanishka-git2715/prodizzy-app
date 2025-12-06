@@ -27,9 +27,3 @@ npm run dev
 Open your web browser and go to:
 
 [https://www.prodizzy.com/](https://www.prodizzy.com/)
-
-## Features
-
-- **Responsive Design**: Automatically switches between Desktop (Top Nav) and Mobile (Bottom Nav) views.
-- **Unified Design System**: Consistent colors, typography, and components across all pages.
-- **5 Core Sections**: Home, Search, Create, Resources, Profile.
