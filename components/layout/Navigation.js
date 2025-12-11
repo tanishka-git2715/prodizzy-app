@@ -33,8 +33,10 @@ export default function Navigation() {
 
             {/* Mobile Top Header */}
             <div className={styles.mobileHeader}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <img src="/logo.jpg" alt="Prodizzy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <span className={styles.logo}>Prodizzy</span>
-                <div style={{ width: '32px', height: '32px', background: '#2A303A', borderRadius: '50%' }}></div>
             </div>
 
             {/* Mobile Bottom Navigation */}

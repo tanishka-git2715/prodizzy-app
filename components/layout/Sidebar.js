@@ -19,8 +19,8 @@ export default function Sidebar() {
         <aside className="fixed left-0 top-0 h-screen w-64 border-r border-border bg-background hidden lg:flex flex-col p-6 z-50">
             {/* Logo */}
             <div className="flex items-center gap-3 mb-8 px-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/25">
-                    <Zap className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+                    <img src="/logo.jpg" alt="Prodizzy Logo" className="w-full h-full object-cover" />
                 </div>
                 <span className="text-xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
                     Prodizzy
@@ -34,8 +34,8 @@ export default function Sidebar() {
                         key={item.path}
                         href={item.path}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive(item.path)
-                                ? 'bg-primary/10 text-primary font-medium'
-                                : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
+                            ? 'bg-primary/10 text-primary font-medium'
+                            : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
                             }`}
                     >
                         <item.icon

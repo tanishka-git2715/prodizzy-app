@@ -6,7 +6,7 @@ import { mockProjects } from '@/data/mockData';
 export default function SearchPage() {
     return (
         <MainLayout>
-            <div className="max-w-lg mx-auto">
+            <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
                 {/* Header */}
                 <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
                     <h1 className="text-xl font-heading font-bold text-gradient mb-4">Search</h1>

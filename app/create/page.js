@@ -29,7 +29,7 @@ export default function CreatePage() {
 
     return (
         <MainLayout>
-            <div className="max-w-lg mx-auto">
+            <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
                 <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
                     <h1 className="text-xl font-heading font-bold text-gradient">Create</h1>
                 </header>

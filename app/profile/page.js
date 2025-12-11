@@ -9,7 +9,7 @@ export default function ProfilePage() {
 
     return (
         <MainLayout>
-            <div className="max-w-lg mx-auto">
+            <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
                 {/* Header */}
                 <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4 flex items-center justify-between">
                     <h1 className="text-xl font-heading font-bold text-gradient">Profile</h1>
@@ -44,8 +44,8 @@ export default function ProfilePage() {
                         <button
                             onClick={() => setActiveTab('user')}
                             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'user'
-                                    ? 'bg-background text-foreground shadow-sm'
-                                    : 'text-muted-foreground hover:text-foreground'
+                                ? 'bg-background text-foreground shadow-sm'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             <User size={14} />
@@ -54,8 +54,8 @@ export default function ProfilePage() {
                         <button
                             onClick={() => setActiveTab('project')}
                             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'project'
-                                    ? 'bg-background text-foreground shadow-sm'
-                                    : 'text-muted-foreground hover:text-foreground'
+                                ? 'bg-background text-foreground shadow-sm'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             <Layers size={14} />
