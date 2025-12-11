@@ -83,7 +83,7 @@ export default function SearchPage() {
                 </div>
 
                 <div className="px-4 py-4">
-                    <h2 className="text-lg font-heading font-bold mb-4 px-1">Discover Categories</h2>
+                    <h2 className="text-lg font-heading font-bold mb-4">Discover Categories</h2>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                         {categories.map((category) => (
                             <div
