@@ -1,7 +1,18 @@
 import Card from '@/components/ui/Card';
 import MainLayout from '@/components/layout/MainLayout';
-import { Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
+import { Search as SearchIcon, SlidersHorizontal, Bot, CreditCard, BookOpen, Heart, Users, Wrench, ShoppingCart, Gamepad } from 'lucide-react';
 import { mockProjects } from '@/data/mockData';
+
+const categories = [
+    { icon: Bot, name: 'AI & ML', count: 234 },
+    { icon: CreditCard, name: 'Fintech', count: 189 },
+    { icon: BookOpen, name: 'EdTech', count: 156 },
+    { icon: Heart, name: 'Health', count: 134 },
+    { icon: Users, name: 'Social', count: 112 },
+    { icon: Wrench, name: 'Developer Tools', count: 98 },
+    { icon: ShoppingCart, name: 'E-commerce', count: 87 },
+    { icon: Gamepad, name: 'Gaming', count: 76 },
+];
 
 export default function SearchPage() {
     return (
@@ -26,6 +37,22 @@ export default function SearchPage() {
                 </header>
 
                 <div className="px-4 py-6">
+                    <h2 className="text-lg font-heading font-bold mb-4 px-1">Discover Categories</h2>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        {categories.map((category) => (
+                            <div
+                                key={category.name}
+                                className="bg-card items-center border border-border rounded-2xl p-4 hover:border-primary/50 transition-all cursor-pointer group"
+                            >
+                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                    <category.icon className="w-6 h-6 text-primary" />
+                                </div>
+                                <h3 className="font-semibold text-foreground mb-1">{category.name}</h3>
+                                <p className="text-xs text-muted-foreground font-medium">{category.count} projects</p>
+                            </div>
+                        ))}
+                    </div>
+
                     <h2 className="text-lg font-heading font-bold mb-4 px-1">Recommended for you</h2>
 
                     <div className="grid grid-cols-1 gap-4">
