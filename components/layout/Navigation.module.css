@@ -1,6 +1,9 @@
 .navContainer {
     position: fixed;
-    z-index: 100;
+    transform: translateZ(0);
+    /* Force hardware acceleration */
+    -webkit-transform: translateZ(0);
+    z-index: 9999;
     width: 100%;
     background: rgba(15, 18, 23, 0.8);
     backdrop-filter: blur(12px);
@@ -45,18 +48,21 @@
 .mobileNav {
     display: none;
     position: fixed;
+    transform: translateZ(0);
+    /* Force hardware acceleration */
+    -webkit-transform: translateZ(0);
     bottom: 0;
     left: 0;
     width: 100%;
-    height: var(--bottom-nav-height);
-    background: rgba(15, 18, 23, 0.9);
+    height: 60px;
+    background: rgba(15, 18, 23, 0.95);
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--stroke);
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: env(safe-area-inset-bottom);
     /* Safe area */
-    z-index: 100;
+    z-index: 9999;
 }
 
 .mobileNavItem {
@@ -74,16 +80,15 @@
 }
 
 .mobileCreateBtn {
-    width: 56px;
-    height: 56px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background: var(--accent-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    margin-top: -20px;
-    box-shadow: 0 8px 20px rgba(134, 77, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(134, 77, 255, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -103,9 +108,12 @@
         justify-content: space-between;
         padding: 16px;
         position: fixed;
+        transform: translateZ(0);
+        /* Force hardware acceleration */
+        -webkit-transform: translateZ(0);
         top: 0;
         width: 100%;
-        z-index: 99;
+        z-index: 9999;
         background: var(--bg-dark);
     }
 }
