@@ -1,14 +1,72 @@
 "use client";
+import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import MainLayout from '@/components/layout/MainLayout';
 import { mockProjects } from '@/data/mockData';
+import { supabase } from '@/utils/supabase/client';
 import { Globe, Instagram, Linkedin, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ProjectPage() {
     const params = useParams();
     const { id } = params;
-    const project = mockProjects.find((p) => p.id === id);
+
+    const [project, setProject] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProject = async () => {
+            // 1. Try Mock Data first (instant)
+            const mock = mockProjects.find((p) => p.id === id);
+            if (mock) {
+                setProject(mock);
+                setLoading(false);
+                return;
+            }
+
+            // 2. Validate ID format for Supabase (must be UUID)
+            const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+            if (!isUuid) {
+                console.log("ID is not a UUID and not in mock data:", id);
+                setLoading(false);
+                return;
+            }
+
+            // 3. Try Supabase
+            try {
+                const { data, error } = await supabase
+                    .from('projects')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+
+                if (data) {
+                    // Normalize DB data to match UI structure
+                    setProject({
+                        id: data.id,
+                        title: data.title,
+                        description: data.description,
+                        about: data.description, // Use description as about if strictly needed
+                        image: data.image_url,
+                        socials: {
+                            website: data.website_url,
+                            instagram: '',
+                            linkedin: ''
+                        },
+                        author: { name: data.author_name || 'User' }
+                    });
+                }
+            } catch (err) {
+                console.error("Error loading project:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) fetchProject();
+    }, [id]);
+
+    if (loading) return <MainLayout><div className="flex justify-center p-20">Loading...</div></MainLayout>;
 
     if (!project) {
         return (
@@ -85,42 +143,79 @@ export default function ProjectPage() {
                 {/* Join Team Form */}
                 <div className="bg-card border border-border rounded-xl p-6 sm:p-8">
                     <h2 className="text-2xl font-bold mb-6">Join Team</h2>
-                    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-4" onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.target);
+                        const data = Object.fromEntries(formData.entries());
+
+                        try {
+                            const { error } = await supabase
+                                .from('team_requests')
+                                .insert({
+                                    project_id: project.id,
+                                    project_title: project.title,
+                                    applicant_name: data.name,
+                                    applicant_email: data.email,
+                                    role_applied: data.role,
+                                    message: data.message,
+                                    portfolio_link: data.portfolio
+                                });
+
+                            if (error) {
+                                console.error('Supabase error:', error);
+                                throw error;
+                            }
+                            alert("Application sent successfully!");
+                            e.target.reset();
+                        } catch (err) {
+                            console.error('Full error details:', err);
+                            alert(`Failed to send application. Error: ${err.message || 'Unknown error'}`);
+                        }
+                    }}>
                         <div>
                             <label className="block text-sm font-medium mb-1.5">Name</label>
                             <input
                                 type="text"
+                                name="name"
                                 className="w-full h-10 px-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                 placeholder="Your full name"
+                                required
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-1.5">Email</label>
                             <input
                                 type="email"
+                                name="email"
                                 className="w-full h-10 px-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                 placeholder="name@example.com"
+                                required
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-1.5">Skills / Role You're Applying For</label>
                             <input
                                 type="text"
+                                name="role"
                                 className="w-full h-10 px-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                 placeholder="e.g. Frontend Developer, Marketing..."
+                                required
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-1.5">Why Do You Want to Join {project.title}?</label>
                             <textarea
+                                name="message"
                                 className="w-full h-24 px-3 py-2 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
                                 placeholder="Tell us about your motivation..."
+                                required
                             ></textarea>
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-1.5">Portfolio / LinkedIn / Github</label>
                             <input
                                 type="text"
+                                name="portfolio"
                                 className="w-full h-10 px-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                 placeholder="https://..."
                             />

@@ -15,7 +15,7 @@ export default function ResourcesPage() {
                 <div className="lg:hidden px-4 pt-4">
                     <h1 className="text-2xl font-heading font-bold mb-2">Resources</h1>
                     <div className="mb-6">
-                        <p className="text-sm text-[#888888]">Curated tools for builders.</p>
+                        <p className="text-sm text-[#888888]">Curated tools for builders</p>
                         <div className="h-px bg-white/10 mt-4 w-full" />
                     </div>
                 </div>
@@ -39,7 +39,7 @@ export default function ResourcesPage() {
                                 className="animate-slide-up"
                                 style={{ animationDelay: `${i * 0.1}s` }}
                             >
-                                <Card className="flex items-center p-4 hover:border-primary/50">
+                                <Card className="flex items-center p-4 hover:border-primary/50 border border-white/20">
                                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-background border border-border flex items-center justify-center mr-4">
                                         <FileText className="w-6 h-6 text-primary" />
                                     </div>

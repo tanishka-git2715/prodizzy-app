@@ -1,3 +1,17 @@
+
+export const mockUser = {
+    id: "mock-tanishka-id",
+    name: "Tanishka",
+    avatar: "/tanishka_avatar.png",
+    headline: "Full Stack Developer | Building Prodizzy",
+    location: "Delhi, India",
+    about: "Building improved ways to connect and collaborate. Founder of Prodizzy.",
+    socials: {
+        linkedin: "https://www.linkedin.com/in/tanishka2712/",
+        twitter: "https://x.com/tanishka"
+    }
+};
+
 export const mockProjects = [
     {
         id: "chordy",
@@ -16,9 +30,9 @@ export const mockProjects = [
         },
         detailsUrl: "/projects/chordy",
         author: {
-            name: "Tanishka",
-            avatar: "/tanishka_avatar.png",
-            profileUrl: "/profile"
+            name: mockUser.name,
+            avatar: mockUser.avatar,
+            profileUrl: `/profile/${mockUser.id}`
         },
         joinTeam: true,
         image: "/chordy_logo.jpg",
@@ -43,9 +57,9 @@ export const mockProjects = [
         },
         detailsUrl: "/projects/carbonzy",
         author: {
-            name: "Tanishka",
-            avatar: "/tanishka_avatar.png",
-            profileUrl: "/profile"
+            name: mockUser.name,
+            avatar: mockUser.avatar,
+            profileUrl: `/profile/${mockUser.id}`
         },
         joinTeam: true,
         image: "/carbonzy_logo.jpg",
@@ -62,17 +76,17 @@ export const mockProjects = [
         likes: 0,
         upvotes: 0,
         comments: 0,
-        websiteUrl: "",
+        websiteUrl: "https://bluuroom.netlify.app",
         socials: {
-            website: "",
+            website: "https://bluuroom.netlify.app",
             instagram: "",
             linkedin: ""
         },
         detailsUrl: "/projects/bluuroom",
         author: {
-            name: "Tanishka",
-            avatar: "/tanishka_avatar.png",
-            profileUrl: "/profile"
+            name: mockUser.name,
+            avatar: mockUser.avatar,
+            profileUrl: `/profile/${mockUser.id}`
         },
         joinTeam: true,
         image: "/bluuroom_logo.png",

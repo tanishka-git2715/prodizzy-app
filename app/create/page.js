@@ -1,10 +1,14 @@
 "use client";
 import { useState } from 'react';
 import MainLayout from '@/components/layout/MainLayout';
-import { Rocket, Lightbulb, Wrench, Beaker, ArrowRight } from 'lucide-react';
+import { Rocket, Lightbulb, Wrench, Beaker, ArrowRight, Loader2 } from 'lucide-react';
+import { supabase } from '@/utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 export default function CreatePage() {
+    const router = useRouter();
     const [imagePreview, setImagePreview] = useState(null);
+    const [uploading, setUploading] = useState(false);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -17,13 +21,70 @@ export default function CreatePage() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        console.log('Project Data:', data);
-        alert('Project Created! (Check console for data)');
-        // Redirect or reset form here
+        setUploading(true);
+
+        try {
+            // 1. Check Auth
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                alert("Please login to submit a project.");
+                router.push('/login');
+                return;
+            }
+
+            const formData = new FormData(e.target);
+            const rawData = Object.fromEntries(formData.entries());
+            const file = formData.get('logo');
+
+            let publicUrl = "https://placehold.co/400x400/png?text=No+Logo"; // Default Logo
+
+            // 2. Upload Image (Optional)
+            if (file && file.size > 0) {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${user.id}-${Math.random()}.${fileExt}`;
+                const filePath = `${fileName}`;
+
+                const { error: uploadError } = await supabase.storage
+                    .from('project-images')
+                    .upload(filePath, file);
+
+                if (uploadError) throw uploadError;
+
+                const { data } = supabase.storage
+                    .from('project-images')
+                    .getPublicUrl(filePath);
+
+                publicUrl = data.publicUrl;
+            }
+
+            // 3. Insert Project
+            const { error: insertError } = await supabase
+                .from('projects')
+                .insert({
+                    title: rawData.title,
+                    description: rawData.description,
+                    website_url: rawData.websiteUrl || '', // Optional
+                    status: 'pending',
+                    stage: rawData.stage,
+                    join_team: rawData.joinTeam === 'on',
+                    image_url: publicUrl,
+                    author_id: user.id,
+                    author_name: user.user_metadata?.full_name || 'Anonymous'
+                });
+
+            if (insertError) throw insertError;
+
+            alert('Project submitted! It will appear after admin approval.');
+            router.push('/');
+
+        } catch (error) {
+            console.error('Error creating project:', error);
+            alert('Error creating project. Check console.');
+        } finally {
+            setUploading(false);
+        }
     };
 
     return (
@@ -43,7 +104,6 @@ export default function CreatePage() {
                                 accept="image/*"
                                 onChange={handleImageChange}
                                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
-                                required
                             />
                             {imagePreview ? (
                                 <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
@@ -51,6 +111,7 @@ export default function CreatePage() {
                                 <div className="flex flex-col items-center text-muted-foreground group-hover:text-primary transition-colors">
                                     <span className="text-xs font-medium">Upload</span>
                                     <span className="text-[10px]">Logo</span>
+                                    <span className="text-[9px] opacity-70">(Optional)</span>
                                 </div>
                             )}
                         </div>
@@ -82,7 +143,7 @@ export default function CreatePage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Website URL</label>
+                            <label className="text-sm font-medium">Website URL <span className="text-muted-foreground font-normal ml-1">(Optional)</span></label>
                             <input
                                 type="url"
                                 name="websiteUrl"
@@ -116,26 +177,22 @@ export default function CreatePage() {
                                 ))}
                             </div>
                         </div>
-
-                        <div className="flex items-center gap-3 pt-2">
-                            <input
-                                type="checkbox"
-                                name="joinTeam"
-                                id="joinTeam"
-                                className="w-5 h-5 rounded border-border bg-secondary/30 text-primary focus:ring-primary/20"
-                            />
-                            <label htmlFor="joinTeam" className="text-sm font-medium cursor-pointer">
-                                Allow others to join team
-                            </label>
-                        </div>
                     </div>
 
                     {/* Submit */}
                     <button
                         type="submit"
-                        className="mt-4 w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95"
+                        disabled={uploading}
+                        className="mt-2 w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                        Submit Project
+                        {uploading ? (
+                            <>
+                                <Loader2 className="animate-spin" />
+                                Submitting Project...
+                            </>
+                        ) : (
+                            "Submit Project"
+                        )}
                     </button>
                 </form>
             </div >
