@@ -21,8 +21,8 @@ export default function ResourcesPage() {
                 </div>
 
                 {/* Desktop Content spacing */}
-                <div className="hidden lg:block px-4 py-6">
-                    <div className="mb-6">
+                <div className="hidden lg:block px-4 py-3">
+                    <div className="mb-2">
                         <p className="text-sm text-muted-foreground">Curated tools for builders.</p>
                     </div>
                 </div>
