@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Search, Plus, BookOpen, User, Zap, Settings, LogOut, Layers, Mail } from 'lucide-react';
-import ThemeToggle from '../ui/ThemeToggle';
+
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -73,7 +73,7 @@ export default function Sidebar() {
                 <div className="min-w-0">
                     <p className="text-sm font-medium text-foreground truncate">Tanishka</p>
                 </div>
-                <ThemeToggle />
+
             </div>
         </aside>
     );
