@@ -6,15 +6,28 @@ export default function ResourcesPage() {
     return (
         <MainLayout>
             <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
-                <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
+                {/* Desktop Header - Restored */}
+                <header className="hidden lg:block sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
                     <h1 className="text-xl font-heading font-bold text-gradient">Resources</h1>
                 </header>
 
-                <div className="px-4 py-6">
+                {/* Mobile Header - Title + Subtitle */}
+                <div className="lg:hidden px-4 pt-4">
+                    <h1 className="text-2xl font-heading font-bold mb-2">Resources</h1>
+                    <div className="mb-6">
+                        <p className="text-sm text-[#888888]">Curated tools for builders.</p>
+                        <div className="h-px bg-white/10 mt-4 w-full" />
+                    </div>
+                </div>
+
+                {/* Desktop Content spacing */}
+                <div className="hidden lg:block px-4 py-6">
                     <div className="mb-6">
                         <p className="text-sm text-muted-foreground">Curated tools for builders.</p>
                     </div>
+                </div>
 
+                <div className="px-4 pb-6">
                     <div className="flex flex-col gap-4">
                         {[
                             { title: 'MVP Canvas', description: 'Essential template for defining your MVP', url: '/resources/mvp_canvas.pdf' },

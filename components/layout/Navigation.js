@@ -35,11 +35,11 @@ export default function Navigation() {
 
             {/* Mobile Top Header */}
             <div className={styles.mobileHeader}>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden' }}>
                         <img src="/logo.jpg" alt="Prodizzy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
-                    <span className={styles.logo}>Prodizzy</span>
+                    <span className="text-xl font-bold text-white font-heading">Prodizzy</span>
                 </div>
                 <ThemeToggle />
             </div>

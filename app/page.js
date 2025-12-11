@@ -8,14 +8,13 @@ const Index = () => {
         <MainLayout>
             <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
                 {/* Header */}
-                <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4 lg:hidden">
-                    <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-glow-sm">
-                            <img src="/logo.jpg" alt="Prodizzy Logo" className="w-full h-full object-cover" />
-                        </div>
-                        <h1 className="text-xl font-heading font-bold text-gradient">Prodizzy</h1>
-                    </div>
-                </header>
+                {/* Header removed for global mobile header */}
+                {/* Mobile Page Title */}
+                <div className="lg:hidden px-4 pt-4">
+                    <h1 className="text-2xl font-bold font-heading mb-1">Home</h1>
+                    <p className="text-sm text-[#888888] mb-4">Discover what builders are creating.</p>
+                    <div className="h-px bg-white/10 mb-6 w-full" />
+                </div>
 
                 {/* Desktop Header */}
                 <header className="hidden lg:block py-6 border-b border-border mb-6">
@@ -24,7 +23,7 @@ const Index = () => {
                 </header>
 
                 {/* Feed */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-3 px-4 sm:gap-6 sm:px-0">
                     {mockProjects.map((project, index) => (
                         <div
                             key={project.id}

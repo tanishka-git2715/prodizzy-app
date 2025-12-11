@@ -22,16 +22,16 @@ export default function ProfilePage() {
 
     return (
         <MainLayout>
-            <div className="w-full mx-auto px-4 py-6 pb-20">
-                {/* Top Nav (Mobile mostly) */}
-                <div className="flex justify-end mb-4">
+            <div className="w-full mx-auto px-4 py-2 pb-20">
+                {/* Top Nav (Desktop Only - Restored) */}
+                <div className="hidden lg:flex justify-end mb-4">
                     <button className="text-muted-foreground hover:text-foreground p-2">
                         <Settings size={20} />
                     </button>
                 </div>
 
                 {/* Header Profile Info */}
-                <div className="flex flex-col items-center text-center mb-6">
+                <div className="flex flex-col items-center text-center mb-6 mt-4">
                     <div className="relative mb-4">
                         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-border">
                             <img src="/tanishka_avatar.png" alt="Tanishka" className="w-full h-full object-cover" />
