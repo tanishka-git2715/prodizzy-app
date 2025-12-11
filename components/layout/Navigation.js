@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
 import { Home, Search, Plus, BookOpen, User } from 'lucide-react';
 
-import ThemeToggle from '../ui/ThemeToggle';
+
 
 export default function Navigation() {
     const pathname = usePathname();
@@ -41,7 +41,7 @@ export default function Navigation() {
                     </div>
                     <span className="text-xl font-bold text-white font-heading">Prodizzy</span>
                 </div>
-                <ThemeToggle />
+
             </div>
 
             {/* Mobile Bottom Navigation */}
