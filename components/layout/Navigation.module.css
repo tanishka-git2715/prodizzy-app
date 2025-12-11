@@ -89,7 +89,6 @@
     align-items: center;
     justify-content: center;
     color: white;
-    box-shadow: 0 4px 12px rgba(134, 77, 255, 0.3);
 }
 
 @media (max-width: 768px) {
