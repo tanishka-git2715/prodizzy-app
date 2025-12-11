@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, Plus, BookOpen, User, Zap, Settings, LogOut, Layers } from 'lucide-react';
+import { Home, Search, Plus, BookOpen, User, Zap, Settings, LogOut, Layers, Mail } from 'lucide-react';
 import ThemeToggle from '../ui/ThemeToggle';
 
 export default function Sidebar() {
@@ -18,9 +18,9 @@ export default function Sidebar() {
     ];
 
     return (
-        <aside className="fixed left-0 top-0 h-screen w-64 border-r border-border bg-background hidden lg:flex flex-col p-6 z-50">
+        <aside className="fixed left-0 top-0 h-screen w-64 border-r border-border bg-background hidden lg:flex flex-col p-4 z-50">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-4 px-2">
+            <div className="flex items-center gap-3 mb-2 px-2">
                 <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
                     <img src="/logo.jpg" alt="Prodizzy Logo" className="w-full h-full object-cover" />
                 </div>
@@ -55,6 +55,10 @@ export default function Sidebar() {
                 <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-secondary/50 hover:text-foreground transition-all">
                     <Settings size={20} />
                     <span>Settings</span>
+                </button>
+                <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-secondary/50 hover:text-foreground transition-all">
+                    <Mail size={20} />
+                    <span>Contact Us</span>
                 </button>
                 <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all">
                     <LogOut size={20} />
