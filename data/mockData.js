@@ -1,58 +1,83 @@
 export const mockProjects = [
     {
-        id: 1,
-        title: "AI Note Taker",
-        description: "Automatically transcribe and summarize your meetings with AI.",
-        tags: ["AI", "Productivity", "SaaS"],
-        likes: 124,
-        comments: 45,
-        author: {
-            name: "Sarah Chen",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+        id: "chordy",
+        title: "Chordy",
+        description: "AI super-connector",
+        about: "Chordy is an AI superconnector that helps people build meaningful professional relationships based on alignment, intent, and shared purpose.\nInstead of shallow networking, Chordy focuses on real compatibility — matching people who truly resonate with each other.",
+        tags: ["AI", "Networking", "Professional"],
+        likes: 0,
+        upvotes: 0,
+        comments: 0,
+        websiteUrl: "https://chordy.ai",
+        socials: {
+            website: "https://chordy.ai",
+            instagram: "",
+            linkedin: ""
         },
-        image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=1000",
-        timeAgo: "2h ago"
+        detailsUrl: "/projects/chordy",
+        author: {
+            name: "Tanishka",
+            avatar: "/tanishka_avatar.png",
+            profileUrl: "/profile"
+        },
+        joinTeam: true,
+        image: "/chordy_logo.jpg",
+        timeAgo: "2h ago",
+        stage: "Building",
+        category: "AI & ML"
     },
     {
-        id: 2,
-        title: "DevTools Pro",
-        description: "A comprehensive suite of developer tools for modern web development.",
-        tags: ["DevTools", "Web", "Utility"],
-        likes: 89,
-        comments: 12,
-        author: {
-            name: "Alex Rivera",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+        id: "carbonzy",
+        title: "Carbonzy",
+        description: "An eco-friendly platform",
+        about: "Carbonzy makes sustainability rewarding, social, and motivating.\nIt turns climate-positive actions into recognition, pride, and collective momentum — helping people feel excited, not guilty, about taking care of the planet.",
+        tags: ["Climate", "Impact", "Community"],
+        likes: 0,
+        upvotes: 0,
+        comments: 0,
+        websiteUrl: "",
+        socials: {
+            website: "",
+            instagram: "",
+            linkedin: ""
         },
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000",
-        timeAgo: "4h ago"
+        detailsUrl: "/projects/carbonzy",
+        author: {
+            name: "Tanishka",
+            avatar: "/tanishka_avatar.png",
+            profileUrl: "/profile"
+        },
+        joinTeam: true,
+        image: "/carbonzy_logo.jpg",
+        timeAgo: "1d ago",
+        stage: "Ideation",
+        category: "Social"
     },
     {
-        id: 3,
-        title: "Fitness Tracker App",
-        description: "Track your workouts and nutrition with ease.",
-        tags: ["Health", "Mobile", "Fitness"],
-        likes: 256,
-        comments: 67,
-        author: {
-            name: "Mike Johnson",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike"
+        id: "bluuroom",
+        title: "Bluuroom",
+        description: "A student community ecosystem",
+        about: "Bluuroom is a student community ecosystem built on top of 150+ WhatsApp groups.\nIt helps students find opportunities, events, skill groups, and campus networks — all in one clean, structured platform.",
+        tags: ["Community", "Student", "Ecosystem"],
+        likes: 0,
+        upvotes: 0,
+        comments: 0,
+        websiteUrl: "",
+        socials: {
+            website: "",
+            instagram: "",
+            linkedin: ""
         },
-        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=1000",
-        timeAgo: "1d ago"
-    },
-    {
-        id: 4,
-        title: "Finance Dashboard",
-        description: "Manage your personal finances and investments in one place.",
-        tags: ["Finance", "Dashboard", "React"],
-        likes: 45,
-        comments: 8,
+        detailsUrl: "/projects/bluuroom",
         author: {
-            name: "Emily Davis",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily"
+            name: "Tanishka",
+            avatar: "/tanishka_avatar.png",
+            profileUrl: "/profile"
         },
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-        timeAgo: "2d ago"
+        joinTeam: true,
+        image: "/bluuroom_logo.png",
+        timeAgo: "2d ago",
+        stage: "Live",
+        category: "Social"
     }
 ];

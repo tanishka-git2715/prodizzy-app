@@ -11,8 +11,8 @@ export default function Sidebar() {
     const navItems = [
         { icon: Home, label: 'Home', path: '/' },
         { icon: Search, label: 'Search', path: '/search' },
-        { icon: Plus, label: 'Create', path: '/create' },
-        { icon: BookOpen, label: 'Resources', path: '/resources' },
+        { icon: Plus, label: 'Post', path: '/create' },
+        { icon: BookOpen, label: 'Explore', path: '/resources' },
         { icon: User, label: 'Profile', path: '/profile' },
         { icon: Layers, label: 'Projects', path: '/projects' },
     ];
@@ -66,14 +66,12 @@ export default function Sidebar() {
                 </button>
             </div>
 
-            {/* User Profile Snippet - Pushed to Bottom */}
             <div className="mt-auto pt-2 flex items-center gap-2 px-2">
                 <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center overflow-hidden border border-border">
-                    <User className="w-5 h-5 text-muted-foreground" />
+                    <img src="/tanishka_avatar.png" alt="User" className="w-full h-full object-cover" />
                 </div>
                 <div className="min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">Alex Builder</p>
-                    <p className="text-xs text-muted-foreground truncate">@alexbuilds</p>
+                    <p className="text-sm font-medium text-foreground truncate">Tanishka</p>
                 </div>
                 <ThemeToggle />
             </div>

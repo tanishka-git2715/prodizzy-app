@@ -1,12 +1,39 @@
-import { Heart, MessageSquare, ExternalLink } from 'lucide-react';
-import Image from 'next/image';
+"use client";
 
-const ProjectCard = ({ title, description, tags, likes, comments, author, image, timeAgo }) => {
+import { ArrowBigUp, Bookmark, ExternalLink, Users } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
+const ProjectCard = ({ title, description, tags, likes, comments, author, image, timeAgo, websiteUrl, detailsUrl, joinTeam, stage }) => {
+    const router = useRouter();
+
+    const handleCardClick = () => {
+        if (detailsUrl) {
+            router.push(detailsUrl);
+        }
+    };
+
+    const handleAction = (e, action) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (action === 'Join Team') {
+            if (detailsUrl) router.push(detailsUrl);
+            return;
+        }
+
+        console.log(`${action} clicked`);
+        // Add actual logic here later
+    };
+
     return (
-        <div className="group block p-4 hover:bg-accent/50 transition-colors cursor-pointer">
+        <div
+            onClick={handleCardClick}
+            className="group block p-5 rounded-xl border border-border bg-card hover:border-primary/20 hover:shadow-lg transition-all duration-300 cursor-pointer"
+        >
             <div className="flex gap-4">
                 {/* Project Image */}
-                <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-border bg-muted">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg overflow-hidden border border-border bg-muted">
                     <img
                         src={image}
                         alt={title}
@@ -16,46 +43,109 @@ const ProjectCard = ({ title, description, tags, likes, comments, author, image,
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-3">
                         <div>
-                            <h3 className="font-heading font-semibold text-foreground leading-tight group-hover:text-primary transition-colors">
-                                {title}
-                            </h3>
-                            <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                            <div className="flex items-center gap-2 mb-1">
+                                <h3 className="font-heading font-semibold text-foreground text-lg leading-tight group-hover:text-primary transition-colors">
+                                    {title}
+                                </h3>
+                            </div>
+                            <p className="text-sm text-muted-foreground line-clamp-1 mb-0.5">
                                 {description}
                             </p>
                         </div>
-                        <span className="text-xs text-muted-foreground whitespace-nowrap">{timeAgo}</span>
+                        <div className="flex flex-col items-end gap-1">
+                            {stage && (
+                                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${stage === 'Live' ? 'bg-green-500/10 text-green-600 border-green-500/20' :
+                                    stage === 'Building' ? 'bg-orange-500/10 text-orange-600 border-orange-500/20' :
+                                        'bg-secondary text-secondary-foreground border-transparent'
+                                    }`}>
+                                    {stage}
+                                </span>
+                            )}
+                            <span className="text-xs text-muted-foreground whitespace-nowrap hidden sm:block">{timeAgo}</span>
+                        </div>
                     </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mt-3">
-                        {tags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary text-secondary-foreground"
+                    {/* Footer Actions */}
+                    <div className="flex flex-wrap items-center justify-between gap-y-3 mt-1">
+                        {/* Author & Follow */}
+                        <div className="flex items-center gap-3">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (author.profileUrl) router.push(author.profileUrl);
+                                }}
+                                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group/author text-left"
                             >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex items-center gap-4 mt-4">
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                            <img src={author.avatar} alt={author.name} className="w-5 h-5 rounded-full" />
-                            <span className="text-xs">{author.name}</span>
+                                <img src={author.avatar} alt={author.name} className="w-5 h-5 rounded-full ring-1 ring-border group-hover/author:ring-primary/50" />
+                                <span className="text-xs font-medium">{author.name}</span>
+                            </button>
+                            <button
+                                onClick={(e) => handleAction(e, 'Follow')}
+                                className="text-xs font-medium text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 px-2 py-0.5 rounded-full transition-colors"
+                            >
+                                Follow
+                            </button>
                         </div>
 
-                        <div className="flex items-center gap-4 ml-auto">
-                            <button className="flex items-center gap-1.5 text-muted-foreground hover:text-red-500 transition-colors group/like">
-                                <Heart className="w-4 h-4 group-hover/like:fill-current" />
-                                <span className="text-xs font-medium">{likes}</span>
+                        {/* Action Buttons */}
+                        <div className="flex items-center gap-3">
+                            {/* Upvotes */}
+                            <button
+                                onClick={(e) => handleAction(e, 'Upvote')}
+                                className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors group/vote"
+                            >
+                                <div className="p-1 rounded-md group-hover/vote:bg-primary/10 transition-colors">
+                                    <ArrowBigUp className="w-5 h-5" />
+                                </div>
+                                <span className="text-xs font-medium">{likes || 0}</span>
                             </button>
-                            <button className="flex items-center gap-1.5 text-muted-foreground hover:text-blue-500 transition-colors">
-                                <MessageSquare className="w-4 h-4" />
-                                <span className="text-xs font-medium">{comments}</span>
+
+                            {/* Save */}
+                            <button
+                                onClick={(e) => handleAction(e, 'Save')}
+                                className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors group/save"
+                                title="Save Project"
+                            >
+                                <div className="p-1 rounded-md group-hover/save:bg-primary/10 transition-colors">
+                                    <Bookmark className="w-4 h-4" />
+                                </div>
                             </button>
+
+                            {/* Links */}
+                            <div className="h-4 w-px bg-border mx-1" />
+
+                            <a
+                                href={websiteUrl || "#"}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-xs font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
+                            >
+                                Visit
+                                <ExternalLink className="w-3 h-3" />
+                            </a>
+
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    router.push(detailsUrl);
+                                }}
+                                className="text-xs font-medium text-primary hover:text-primary/80"
+                            >
+                                Details
+                            </button>
+
+                            {joinTeam && (
+                                <button
+                                    onClick={(e) => handleAction(e, 'Join Team')}
+                                    className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors shadow-sm ml-1"
+                                >
+                                    <Users className="w-3 h-3" />
+                                    Join Team
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,11 @@ export default function ResourcesPage() {
                     </div>
 
                     <div className="flex flex-col gap-4">
-                        {['PRD Template', 'MVP Canvas', 'Launch Checklist', 'User Persona Kit'].map((item, i) => (
+                        {[
+                            { title: 'MVP Canvas', description: 'Essential template for defining your MVP', url: '/resources/mvp_canvas.pdf' },
+                            { title: 'Sample PRD Document', description: 'Sample Product Requirements Document of Zomato', url: '/resources/prd_document.pdf' },
+                            { title: 'Brand Guidelines', description: 'Visual identity and design standards', url: '/resources/brand_guidelines.pdf' },
+                        ].map((item, i) => (
                             <div
                                 key={i}
                                 className="animate-slide-up"
@@ -27,12 +31,24 @@ export default function ResourcesPage() {
                                         <FileText className="w-6 h-6 text-primary" />
                                     </div>
                                     <div className="flex-1 min-w-0 mr-4">
-                                        <h3 className="text-base font-bold mb-0.5 truncate">{item}</h3>
-                                        <p className="text-xs text-muted-foreground line-clamp-1">Essential documentation template.</p>
+                                        <h3 className="text-base font-bold mb-0.5 truncate">{item.title}</h3>
+                                        <p className="text-xs text-muted-foreground line-clamp-1">{item.description}</p>
                                     </div>
-                                    <button className="w-10 h-10 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center text-secondary-foreground transition-colors flex-shrink-0">
-                                        <Download size={18} />
-                                    </button>
+                                    {item.url !== '#' ? (
+                                        <a
+                                            href={item.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            {...(item.url.endsWith('.pdf') ? { download: true } : {})}
+                                            className="w-10 h-10 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center text-secondary-foreground transition-colors flex-shrink-0"
+                                        >
+                                            <Download size={18} />
+                                        </a>
+                                    ) : (
+                                        <button className="w-10 h-10 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center text-secondary-foreground transition-colors flex-shrink-0">
+                                            <Download size={18} />
+                                        </button>
+                                    )}
                                 </Card>
                             </div>
                         ))}

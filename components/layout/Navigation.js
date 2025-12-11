@@ -21,8 +21,8 @@ export default function Navigation() {
                     <div className={styles.navLinks}>
                         <Link href="/" className={`${styles.navLink} ${isActive('/')}`}>Home</Link>
                         <Link href="/search" className={`${styles.navLink} ${isActive('/search')}`}>Search</Link>
-                        <Link href="/create" className={`${styles.navLink} ${isActive('/create')}`}>Create</Link>
-                        <Link href="/resources" className={`${styles.navLink} ${isActive('/resources')}`}>Resources</Link>
+                        <Link href="/create" className={`${styles.navLink} ${isActive('/create')}`}>Post</Link>
+                        <Link href="/resources" className={`${styles.navLink} ${isActive('/resources')}`}>Explore</Link>
                         <Link href="/profile" className={`${styles.navLink} ${isActive('/profile')}`}>Profile</Link>
                     </div>
 
@@ -59,7 +59,7 @@ export default function Navigation() {
                 </Link>
                 <Link href="/resources" className={`${styles.mobileNavItem} ${isActive('/resources')}`}>
                     <BookOpen size={24} />
-                    <span>Resources</span>
+                    <span>Explore</span>
                 </Link>
                 <Link href="/profile" className={`${styles.mobileNavItem} ${isActive('/profile')}`}>
                     <User size={24} />

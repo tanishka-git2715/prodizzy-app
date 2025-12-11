@@ -19,12 +19,12 @@ const Index = () => {
 
                 {/* Desktop Header */}
                 <header className="hidden lg:block py-6 border-b border-border mb-6">
-                    <h1 className="text-2xl font-heading font-bold">Your Feed</h1>
+                    <h1 className="text-2xl font-heading font-bold">Home</h1>
                     <p className="text-muted-foreground mt-1">Discover what builders are creating</p>
                 </header>
 
                 {/* Feed */}
-                <div className="divide-y divide-border">
+                <div className="flex flex-col gap-6">
                     {mockProjects.map((project, index) => (
                         <div
                             key={project.id}

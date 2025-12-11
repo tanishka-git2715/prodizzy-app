@@ -1,20 +1,37 @@
+"use client";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Card from '@/components/ui/Card';
+import ProjectCard from '@/components/projects/ProjectCard';
 import MainLayout from '@/components/layout/MainLayout';
 import { Search as SearchIcon, SlidersHorizontal, Bot, CreditCard, BookOpen, Heart, Users, Wrench, ShoppingCart, Gamepad } from 'lucide-react';
 import { mockProjects } from '@/data/mockData';
 
 const categories = [
-    { icon: Bot, name: 'AI & ML', count: 234 },
-    { icon: CreditCard, name: 'Fintech', count: 189 },
-    { icon: BookOpen, name: 'EdTech', count: 156 },
-    { icon: Heart, name: 'Health', count: 134 },
-    { icon: Users, name: 'Social', count: 112 },
-    { icon: Wrench, name: 'Developer Tools', count: 98 },
-    { icon: ShoppingCart, name: 'E-commerce', count: 87 },
-    { icon: Gamepad, name: 'Gaming', count: 76 },
+    { icon: Bot, name: 'AI & ML', count: 1 },
+    { icon: Users, name: 'Social', count: 2 },
 ];
 
 export default function SearchPage() {
+    const router = useRouter();
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredProjects = mockProjects.filter((project) => {
+        const matchesCategory = selectedCategory ? project.category === selectedCategory : true;
+        const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            project.description.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    const handleCategoryClick = (categoryName) => {
+        if (selectedCategory === categoryName) {
+            setSelectedCategory(null); // Deselect
+        } else {
+            setSelectedCategory(categoryName);
+        }
+    };
+
     return (
         <MainLayout>
             <div className="w-full max-w-lg lg:max-w-full lg:px-8 mx-auto">
@@ -28,6 +45,8 @@ export default function SearchPage() {
                         <input
                             type="text"
                             placeholder="Search projects..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full h-11 bg-secondary/50 border border-transparent rounded-xl pl-11 pr-11 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/70"
                         />
                         <button className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1">
@@ -42,49 +61,37 @@ export default function SearchPage() {
                         {categories.map((category) => (
                             <div
                                 key={category.name}
-                                className="bg-card items-center border border-border rounded-2xl p-4 hover:border-primary/50 transition-all cursor-pointer group"
+                                onClick={() => handleCategoryClick(category.name)}
+                                className={`items-center border rounded-2xl p-4 transition-all cursor-pointer group ${selectedCategory === category.name
+                                    ? 'bg-primary/5 border-primary shadow-sm'
+                                    : 'bg-card border-border hover:border-primary/50'
+                                    }`}
                             >
-                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                    <category.icon className="w-6 h-6 text-primary" />
-                                </div>
                                 <h3 className="font-semibold text-foreground mb-1">{category.name}</h3>
                                 <p className="text-xs text-muted-foreground font-medium">{category.count} projects</p>
                             </div>
                         ))}
                     </div>
 
-                    <h2 className="text-lg font-heading font-bold mb-4 px-1">Recommended for you</h2>
-
+                    {/* Results Grid - Re-adding this to show filtered results */}
                     <div className="grid grid-cols-1 gap-4">
-                        {mockProjects.map((project, index) => (
-                            <div
-                                key={project.id}
-                                className="animate-slide-up"
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <Card className="hover:border-primary/50 cursor-pointer p-4">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center overflow-hidden border border-border">
-                                            <img src={project.author.avatar} alt={project.author.name} className="w-full h-full object-cover" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold text-foreground text-sm">{project.author.name}</h4>
-                                            <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-medium">Product Designer</p>
-                                        </div>
-                                    </div>
-                                    <h3 className="text-base font-semibold mb-1.5">{project.title}</h3>
-                                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{project.description}</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.tags.map(tag => (
-                                            <span key={tag} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-secondary text-secondary-foreground">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </Card>
+                        {filteredProjects.length > 0 ? (
+                            filteredProjects.map((project, index) => (
+                                <div
+                                    key={project.id}
+                                    className="animate-slide-up"
+                                    style={{ animationDelay: `${index * 0.1}s` }}
+                                >
+                                    <ProjectCard {...project} />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-10 text-muted-foreground">
+                                <p>No projects found matching your criteria.</p>
                             </div>
-                        ))}
+                        )}
                     </div>
+
                 </div>
             </div>
         </MainLayout>

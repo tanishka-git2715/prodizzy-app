@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD Template</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 40px; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #111; }
+        h2 { margin-top: 30px; color: #444; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        h3 { margin-top: 20px; color: #666; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { bg-color: #f4f4f4; font-weight: bold; }
+        ul { margin-top: 5px; }
+        .print-hint { background: #eef; padding: 10px; border-radius: 5px; margin-bottom: 20px; text-align: center; font-size: 0.9em; color: #55a; border: 1px solid #ccf; }
+        @media print { .print-hint { display: none; } body { padding: 0; } }
+    </style>
+</head>
+<body>
+    <div class="print-hint">
+        💡 <strong>Tip:</strong> Right-click and select "Print" (or Ctrl+P) to save this document as a PDF!
+    </div>
+
+    <h1>Product Requirements Document (PRD) Template</h1>
+
+    <h2>1. Introduction</h2>
+    <h3>1.1 Purpose</h3>
+    <p>[Briefly describe the purpose of this document and the product being built.]</p>
+
+    <h3>1.2 Scope</h3>
+    <p>[Define what is in scope and what is out of scope for this release.]</p>
+
+    <h3>1.3 Definitions & Acronyms</h3>
+    <p>[List any technical terms or acronyms used in the document.]</p>
+
+    <h2>2. Product Overview</h2>
+    <h3>2.1 Problem Statement</h3>
+    <p>[What problem are we solving? Who are we solving it for?]</p>
+
+    <h3>2.2 Goals & Objectives</h3>
+    <p>[What are the high-level goals? e.g., Increase user retention by 20%.]</p>
+
+    <h3>2.3 User Personas</h3>
+    <p>[Describe the target users.]</p>
+
+    <h2>3. Features & Requirements</h2>
+    <h3>3.1 Functional Requirements</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Feature</th>
+                <th>Description</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>F1</td>
+                <td>User Login</td>
+                <td>Allow users to log in via Email/Google</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>F2</td>
+                <td>Dashboard</td>
+                <td>View project statistics</td>
+                <td>Medium</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3.2 Non-Functional Requirements</h3>
+    <ul>
+        <li><strong>Performance:</strong> Page load < 2s.</li>
+        <li><strong>Security:</strong> Data encryption at rest.</li>
+        <li><strong>Scalability:</strong> Support 10k concurrent users.</li>
+    </ul>
+
+    <h2>4. User Experience (UX) / User Interface (UI)</h2>
+    <p>[Describe the user flow, include links to wireframes or mockups.]</p>
+
+    <h2>5. Technical Architecture</h2>
+    <p>[High-level overview of the tech stack, database schema, and API structure.]</p>
+
+    <h2>6. Release Plan</h2>
+    <h3>6.1 Milestones</h3>
+    <ul>
+        <li><strong>Alpha:</strong> [Date] - Internal testing</li>
+        <li><strong>Beta:</strong> [Date] - Selected users</li>
+        <li><strong>Live:</strong> [Date] - Public launch</li>
+    </ul>
+
+    <h2>7. Risks & Mitigation</h2>
+    <p>[List potential risks and how to handle them.]</p>
+</body>
+</html>
