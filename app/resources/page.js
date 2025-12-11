@@ -1,30 +1,44 @@
-import Card from '../../components/ui/Card';
-import { Download, ExternalLink } from 'lucide-react';
+import Card from '@/components/ui/Card';
+import MainLayout from '@/components/layout/MainLayout';
+import { Download, FileText } from 'lucide-react';
 
 export default function ResourcesPage() {
     return (
-        <div className="container" style={{ paddingTop: 'var(--header-height)', paddingBottom: '100px' }}>
-            <div style={{ padding: '40px 0' }}>
-                <h1 style={{ marginBottom: '16px' }}>Resources</h1>
-                <p style={{ marginBottom: '40px', maxWidth: '600px' }}>Curated tools, templates, and guides to help you build better products faster.</p>
+        <MainLayout>
+            <div className="max-w-lg mx-auto">
+                <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
+                    <h1 className="text-xl font-heading font-bold text-gradient">Resources</h1>
+                </header>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-                    {['PRD Template', 'MVP Canvas', 'Launch Checklist', 'User Persona Kit'].map((item, i) => (
-                        <Card key={i}>
-                            <div style={{ height: '140px', background: 'linear-gradient(135deg, #1A1F27 0%, #2A303A 100%)', borderRadius: '8px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <FileText size={40} color="#4F7BFF" />
+                <div className="px-4 py-6">
+                    <div className="mb-6">
+                        <p className="text-sm text-muted-foreground">Curated tools for builders.</p>
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        {['PRD Template', 'MVP Canvas', 'Launch Checklist', 'User Persona Kit'].map((item, i) => (
+                            <div
+                                key={i}
+                                className="animate-slide-up"
+                                style={{ animationDelay: `${i * 0.1}s` }}
+                            >
+                                <Card className="flex items-center p-4 hover:border-primary/50">
+                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-background border border-border flex items-center justify-center mr-4">
+                                        <FileText className="w-6 h-6 text-primary" />
+                                    </div>
+                                    <div className="flex-1 min-w-0 mr-4">
+                                        <h3 className="text-base font-bold mb-0.5 truncate">{item}</h3>
+                                        <p className="text-xs text-muted-foreground line-clamp-1">Essential documentation template.</p>
+                                    </div>
+                                    <button className="w-10 h-10 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center text-secondary-foreground transition-colors flex-shrink-0">
+                                        <Download size={18} />
+                                    </button>
+                                </Card>
                             </div>
-                            <h3 style={{ fontSize: '18px', marginBottom: '8px' }}>{item}</h3>
-                            <p style={{ fontSize: '14px', marginBottom: '16px' }}>Essential documentation template for product managers and founders.</p>
-                            <button className="btn btn-secondary" style={{ width: '100%', height: '40px', fontSize: '14px' }}>
-                                <Download size={16} style={{ marginRight: '8px' }} /> Download
-                            </button>
-                        </Card>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     );
 }
-
-import { FileText } from 'lucide-react';

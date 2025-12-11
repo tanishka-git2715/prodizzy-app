@@ -11,8 +11,8 @@ export default function Navigation() {
 
     return (
         <>
-            {/* Desktop Top Navigation */}
-            <nav className={styles.navContainer}>
+            {/* Desktop Top Navigation - Hidden as we now use Sidebar */}
+            <nav className={`${styles.navContainer} lg:hidden`}>
                 <div className={styles.desktopNav}>
                     <Link href="/" className={styles.logo}>Prodizzy</Link>
 

@@ -1,82 +1,98 @@
 "use client";
 import { useState } from 'react';
-import Card from '../../components/ui/Card';
-import { MapPin, Link as LinkIcon, Github, Twitter } from 'lucide-react';
+import Card from '@/components/ui/Card';
+import MainLayout from '@/components/layout/MainLayout';
+import { MapPin, Link as LinkIcon, User, Layers, Share2, Settings } from 'lucide-react';
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState('user');
 
     return (
-        <div className="container" style={{ paddingTop: 'var(--header-height)', paddingBottom: '100px' }}>
-            <div style={{ maxWidth: '800px', margin: '40px auto 0' }}>
+        <MainLayout>
+            <div className="max-w-lg mx-auto">
+                {/* Header */}
+                <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4 flex items-center justify-between">
+                    <h1 className="text-xl font-heading font-bold text-gradient">Profile</h1>
+                    <button className="text-muted-foreground hover:text-foreground">
+                        <Settings size={20} />
+                    </button>
+                </header>
 
-                {/* Profile Header */}
-                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                    <div style={{ width: '120px', height: '120px', borderRadius: '50%', background: '#2A303A', margin: '0 auto 24px', border: '4px solid var(--card-bg)' }}></div>
-                    <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>Alex Builder</h1>
-                    <p style={{ marginBottom: '16px' }}>Full Stack Developer & UI Designer</p>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', color: 'var(--text-secondary)', fontSize: '14px' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={14} /> San Francisco</span>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><LinkIcon size={14} /> alex.dev</span>
+                <div className="px-4 py-6">
+                    {/* Profile Header */}
+                    <div className="flex flex-col items-center text-center mb-8">
+                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-secondary border-4 border-card shadow-xl mb-4 flex items-center justify-center">
+                            <User className="w-10 h-10 text-muted-foreground" />
+                        </div>
+                        <h1 className="text-2xl font-heading font-bold mb-1">Alex Builder</h1>
+                        <p className="text-muted-foreground text-sm mb-4">Full Stack Developer & UI Designer</p>
+
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <div className="flex items-center gap-1.5">
+                                <MapPin size={14} />
+                                <span>San Francisco</span>
+                            </div>
+                            <a href="#" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                                <LinkIcon size={14} />
+                                <span>alex.dev</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Tabs */}
+                    <div className="flex p-1 bg-secondary/50 rounded-xl mb-6">
+                        <button
+                            onClick={() => setActiveTab('user')}
+                            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'user'
+                                    ? 'bg-background text-foreground shadow-sm'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            <User size={14} />
+                            User
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('project')}
+                            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'project'
+                                    ? 'bg-background text-foreground shadow-sm'
+                                    : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            <Layers size={14} />
+                            Projects
+                        </button>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-col gap-4">
+                        <Card className="hover:border-primary/20 animate-slide-up" style={{ animationDelay: '0s' }}>
+                            <div className="flex items-center justify-between mb-3">
+                                <h3 className="text-base font-bold">About</h3>
+                                <button className="text-muted-foreground hover:text-primary transition-colors">
+                                    <Share2 size={16} />
+                                </button>
+                            </div>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                Passionate about building tools that help other developers be more productive. Currently working on a new SaaS platform for project management.
+                            </p>
+                        </Card>
+
+                        <Card className="hover:border-primary/20 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                            <h3 className="text-base font-bold mb-3">Skills</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {['React', 'Next.js', 'Node.js', 'UI Design', 'TypeScript', 'Tailwind'].map(skill => (
+                                    <span
+                                        key={skill}
+                                        className="px-3 py-1 bg-secondary/50 text-secondary-foreground rounded-full text-xs font-medium border border-transparent hover:border-border transition-colors cursor-default"
+                                    >
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </Card>
                     </div>
                 </div>
-
-                {/* Toggle */}
-                <div style={{ display: 'flex', background: 'var(--card-bg)', padding: '4px', borderRadius: '12px', marginBottom: '32px' }}>
-                    <button
-                        onClick={() => setActiveTab('user')}
-                        style={{
-                            flex: 1,
-                            padding: '12px',
-                            borderRadius: '8px',
-                            background: activeTab === 'user' ? 'var(--bg-dark)' : 'transparent',
-                            color: activeTab === 'user' ? 'white' : 'var(--text-secondary)',
-                            border: 'none',
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                        }}
-                    >
-                        User Profile
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('project')}
-                        style={{
-                            flex: 1,
-                            padding: '12px',
-                            borderRadius: '8px',
-                            background: activeTab === 'project' ? 'var(--bg-dark)' : 'transparent',
-                            color: activeTab === 'project' ? 'white' : 'var(--text-secondary)',
-                            border: 'none',
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                        }}
-                    >
-                        Project Profile
-                    </button>
-                </div>
-
-                {/* Content */}
-                <div style={{ display: 'grid', gap: '24px' }}>
-                    <Card>
-                        <h3 style={{ marginBottom: '16px' }}>About</h3>
-                        <p>Passionate about building tools that help other developers be more productive. Currently working on a new SaaS platform for project management.</p>
-                    </Card>
-
-                    <Card>
-                        <h3 style={{ marginBottom: '16px' }}>Skills</h3>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            {['React', 'Next.js', 'Node.js', 'UI Design', 'Product Management'].map(skill => (
-                                <span key={skill} style={{ padding: '8px 16px', background: 'rgba(255,255,255,0.05)', borderRadius: '20px', fontSize: '14px' }}>
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
-                    </Card>
-                </div>
-
             </div>
-        </div>
+        </MainLayout>
     );
 }

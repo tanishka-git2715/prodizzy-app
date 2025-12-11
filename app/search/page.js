@@ -1,54 +1,65 @@
-import Card from '../../components/ui/Card';
+import Card from '@/components/ui/Card';
+import MainLayout from '@/components/layout/MainLayout';
 import { Search as SearchIcon, SlidersHorizontal } from 'lucide-react';
+import { mockProjects } from '@/data/mockData';
 
 export default function SearchPage() {
     return (
-        <div className="container" style={{ paddingTop: 'var(--header-height)', paddingBottom: '100px' }}>
-            <div style={{ padding: '40px 0 24px' }}>
-                <div style={{ position: 'relative', marginBottom: '24px' }}>
-                    <SearchIcon style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
-                    <input
-                        type="text"
-                        placeholder="Search projects, people, or resources..."
-                        style={{
-                            width: '100%',
-                            height: '56px',
-                            background: 'var(--card-bg)',
-                            border: '1px solid var(--stroke)',
-                            borderRadius: '16px',
-                            padding: '0 48px',
-                            color: 'white',
-                            fontSize: '16px',
-                            outline: 'none'
-                        }}
-                    />
-                    <button style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-secondary)' }}>
-                        <SlidersHorizontal size={20} />
-                    </button>
-                </div>
+        <MainLayout>
+            <div className="max-w-lg mx-auto">
+                {/* Header */}
+                <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-4">
+                    <h1 className="text-xl font-heading font-bold text-gradient mb-4">Search</h1>
+                    <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">
+                            <SearchIcon size={18} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search projects..."
+                            className="w-full h-11 bg-secondary/50 border border-transparent rounded-xl pl-11 pr-11 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-muted-foreground/70"
+                        />
+                        <button className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1">
+                            <SlidersHorizontal size={18} />
+                        </button>
+                    </div>
+                </header>
 
-                <h2 style={{ fontSize: '24px', marginBottom: '16px' }}>Recommended for you</h2>
+                <div className="px-4 py-6">
+                    <h2 className="text-lg font-heading font-bold mb-4 px-1">Recommended for you</h2>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-                    {[1, 2, 3, 4].map((item) => (
-                        <Card key={item}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#2A303A' }}></div>
-                                <div>
-                                    <h4 style={{ fontSize: '16px' }}>Creator Name</h4>
-                                    <p style={{ fontSize: '12px' }}>Product Designer</p>
-                                </div>
+                    <div className="grid grid-cols-1 gap-4">
+                        {mockProjects.map((project, index) => (
+                            <div
+                                key={project.id}
+                                className="animate-slide-up"
+                                style={{ animationDelay: `${index * 0.1}s` }}
+                            >
+                                <Card className="hover:border-primary/50 cursor-pointer p-4">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center overflow-hidden border border-border">
+                                            <img src={project.author.avatar} alt={project.author.name} className="w-full h-full object-cover" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-foreground text-sm">{project.author.name}</h4>
+                                            <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-medium">Product Designer</p>
+                                        </div>
+                                    </div>
+                                    <h3 className="text-base font-semibold mb-1.5">{project.title}</h3>
+                                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{project.description}</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.tags.map(tag => (
+                                            <span key={tag} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-secondary text-secondary-foreground">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </Card>
                             </div>
-                            <h3 style={{ fontSize: '18px', marginBottom: '8px' }}>Design System Kit</h3>
-                            <p style={{ fontSize: '14px', marginBottom: '16px' }}>A comprehensive UI kit for modern SaaS applications.</p>
-                            <div style={{ display: 'flex', gap: '8px' }}>
-                                <span style={{ fontSize: '12px', background: '#2A303A', padding: '4px 8px', borderRadius: '4px' }}>Figma</span>
-                                <span style={{ fontSize: '12px', background: '#2A303A', padding: '4px 8px', borderRadius: '4px' }}>UI/UX</span>
-                            </div>
-                        </Card>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        </MainLayout>
     );
 }
