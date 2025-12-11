@@ -1,6 +1,7 @@
 import './globals.css'
 import Navigation from '../components/layout/Navigation'
 import Sidebar from '../components/layout/Sidebar'
+import { ThemeProvider } from '../components/theme-provider'
 
 export const metadata = {
     title: 'Prodizzy',
@@ -9,11 +10,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body>
-                <Navigation />
-                <Sidebar />
-                <main>{children}</main>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <Navigation />
+                    <Sidebar />
+                    <main>{children}</main>
+                </ThemeProvider>
             </body>
         </html>
     )

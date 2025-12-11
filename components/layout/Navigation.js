@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
 import { Home, Search, Plus, BookOpen, User } from 'lucide-react';
 
+import ThemeToggle from '../ui/ThemeToggle';
+
 export default function Navigation() {
     const pathname = usePathname();
 
@@ -33,10 +35,13 @@ export default function Navigation() {
 
             {/* Mobile Top Header */}
             <div className={styles.mobileHeader}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden' }}>
-                    <img src="/logo.jpg" alt="Prodizzy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div className="flex items-center gap-2">
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', overflow: 'hidden' }}>
+                        <img src="/logo.jpg" alt="Prodizzy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <span className={styles.logo}>Prodizzy</span>
                 </div>
-                <span className={styles.logo}>Prodizzy</span>
+                <ThemeToggle />
             </div>
 
             {/* Mobile Bottom Navigation */}

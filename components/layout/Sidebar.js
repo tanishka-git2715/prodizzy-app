@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Search, Plus, BookOpen, User, Zap, Settings, LogOut } from 'lucide-react';
+import ThemeToggle from '../ui/ThemeToggle';
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -34,8 +35,8 @@ export default function Sidebar() {
                         key={item.path}
                         href={item.path}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive(item.path)
-                            ? 'bg-primary/10 text-primary font-medium'
-                            : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
+                                ? 'bg-primary/10 text-primary font-medium'
+                                : 'text-muted-foreground hover:bg-secondary/50 hover:text-foreground'
                             }`}
                     >
                         <item.icon
@@ -68,6 +69,7 @@ export default function Sidebar() {
                         <p className="text-sm font-medium text-foreground truncate">Alex Builder</p>
                         <p className="text-xs text-muted-foreground truncate">@alexbuilds</p>
                     </div>
+                    <ThemeToggle />
                 </div>
             </div>
         </aside>
