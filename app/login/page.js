@@ -26,14 +26,14 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 lg:ml-64">
             <Link href="/" className="absolute top-8 left-8 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <span className="text-xl font-bold">Prodizzy</span>
             </Link>
 
             <div className="bg-card border border-border rounded-2xl p-8 shadow-sm w-full max-w-md text-center">
                 <div className="mb-8">
-                    <h2 className="text-3xl font-bold tracking-tight">Welcome back</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">Welcome to Prodizzy</h2>
                     <p className="mt-2 text-sm text-muted-foreground">Sign in to your account to continue</p>
                 </div>
 
